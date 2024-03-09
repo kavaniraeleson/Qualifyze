@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: raw_data_request
+    columns:
+      - name: id_request
+        tests:
+          - unique
+
+      - name: created_date
+        tests:
+          - not_null
+
+      - name: audit_type
+        tests:
+          - accepted_values:
+              values: ['EXISTING_AUDIT', 'NEW_AUDIT']
+
+     
+
+  - name: raw_data_credit_packages
+    columns:
+      - name: id_credit_package
+        tests:
+          - unique
+
+      - name: signature_date
+        tests:
+          - not_null
+
+      - name: start_date
+        tests:
+          - not_null
+
+      - name: end_date
+        tests:
+          - not_null
+
