@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: customer_engagement_evolution
+    columns:
+      - name: id_organisation
+        tests:
+          - not_null
+
+
+      
+
+  - name: subscription_data_integration
+    columns:
+      - name: start_date
+        tests:
+          - not_null
+          
+
+      
+
+  - name: credit_package_utilization
+    columns:
+      - name: credit_package_id
+        tests:
+          - not_null
+    
+
+      - name: credit_utilization_status
+        tests:
+          - accepted_values:
+              values: ['Used', 'Unused', 'Expired']
+
