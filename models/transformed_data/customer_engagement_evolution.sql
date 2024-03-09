@@ -23,7 +23,16 @@ WITH CustomerEvolutionCTE AS (
 )
 
 SELECT
-    * FROM 
+    id_organization,
+    customer_name,
+    CASE
+        WHEN has_activity_last_year = 1 AND has_existing_audit = 1 AND has_new_audit = 1 THEN 'Transitioned'
+        WHEN has_activity_last_year = 1 AND has_existing_audit = 1 THEN 'Transactional Only'
+        WHEN has_activity_last_year = 1 AND has_new_audit = 1 THEN 'Subscription Only'
+        ELSE 'No Audit Data or Activity Last Year'
+    END AS customer_evolution
+FROM
     CustomerEvolutionCTE
+
 
 
