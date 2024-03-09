@@ -6,7 +6,7 @@
 
 
 -- SQL query for Customer Engagement Evolution with Model Switch
-WITH CustomerEvolutionCTE AS (
+WITH Customer_evolution AS (
     SELECT
         r.id_organization,
         r.customer_name,
@@ -32,7 +32,7 @@ SELECT
         ELSE 'No Audit Data or Activity Last Year'
     END AS customer_evolution
 FROM
-    CustomerEvolutionCTE
+    Customer_evolution
 
 
 
