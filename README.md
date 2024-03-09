@@ -28,14 +28,14 @@ The `schema.yml` file under `raw_data` defines tests to ensure data quality in t
 
 ### Customer Evolution
 
-The `customer_evolution.sql` transformation in `transformed_data` addresses the business question related to customer evolution.
+The `customer_engagement_evolution.sql` transformation in `transformed_data` addresses the business question related to customer evolution.
 
 #### Transformation Logic:
 
 - Identifies customers who transitioned from individual audit requests to subscription models.
 - Uses the `raw_data_requests` and `raw_data_credit_packages` tables.
 - Utilizes the `CASE` statement to categorize customers based on their audit types.
-- Generates a `customer_evolution` table.
+- Generates a `customer_engagement_evolution` table.
 
 ### Subscription Data Integration
 
@@ -45,7 +45,7 @@ The `subscription_data_integration.sql` transformation in `transformed_data` int
 
 - Joins the `raw_data_credit_packages` and `raw_data_requests` tables.
 - Provides insights into different subscription types and their associations with customer profiles.
-- Generates a `subscription_integration` table.
+- Generates a `subscription_data_integration` table.
 
 ### Credit Package Utilization
 
