@@ -1,8 +1,9 @@
 -- Credit Utilization and Expiry Analysis with Total Credit Left Query
+-- This query I select relevant columns and do some data transformation to check status of credit and also claculate days until credit expiry
+-- 
 WITH credit_utilization AS (
      SELECT
         c.id_credit_package,
-        c.signature_date,
         c.start_date,
         c.end_date,
         c.credits_amount,
@@ -20,17 +21,17 @@ WITH credit_utilization AS (
         {{ref ("raw_data_credit_packages")}} c
     LEFT JOIN
         {{ref ("raw_data_request")}} r ON c.id_organization = r.id_organization
+
+        WHERE r.customer_name IS NOT NULL
 )
 
 SELECT
     id_credit_package,
-    signature_date,
     start_date,
     end_date,
     credits_amount,
     total_value_eur,
     customer_name,
-    audit_type,
     price_eur,
     credit_utilization_status,
     days_until_expiry,
