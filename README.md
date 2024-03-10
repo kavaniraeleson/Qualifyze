@@ -22,30 +22,30 @@ The project is organized into two main folders:
 
 ## Schema Tests
 
-The `schema.yml` file under `raw_data` defines tests to ensure data quality in the raw models. Tests include checking for uniqueness, null values, and accepted values.
+The `schema.yml` file under `raw_data` and `transformed_data` defines tests to ensure data quality in the raw models. Tests include checking for uniqueness, null values, and accepted values.
 
 ## Transformations
 
-### Customer Evolution
+### Customer Engaegement Evolution
 
 The `customer_engagement_evolution.sql` transformation in `transformed_data` addresses the business question related to customer evolution.
 
 #### Transformation Logic:
 
-- Identifies customers who transitioned from individual audit requests to subscription models.
-- Uses the `raw_data_requests` and `raw_data_credit_packages` tables.
-- Utilizes the `CASE` statement to categorize customers based on their audit types.
-- Generates a `customer_engagement_evolution` table.
+- I identify customers who transitioned from individual audit requests to subscription models.
+- Then I the `raw_data_requests` and `raw_data_credit_packages` tables.
+- Also I use  `CASE` statement to categorize customers based on their request id and credit package type.
+- This generates a `customer_engagement_evolution` table.
 
 ### Subscription Data Integration
 
-The `subscription_data_integration.sql` transformation in `transformed_data` integrates raw credit package data with customer data.
+The `subscription_data_integration.sql` transformation in `transformed_data` addresses the question on the subscription of the customers.
 
 #### Transformation Logic:
 
-- Joins the `raw_data_credit_packages` and `raw_data_requests` tables.
-- Provides insights into different subscription types and their associations with customer profiles.
-- Generates a `subscription_data_integration` table.
+- I perform join on the `raw_data_credit_packages` and `raw_data_requests` tables.
+- The logic is to provide insights into different subscription types and their associations with customer profiles.
+- This generates a `subscription_data_integration` table.
 
 ### Credit Package Utilization
 
@@ -54,9 +54,9 @@ The `credit_package_utilization.sql` transformation in `transformed_data` analyz
 #### Transformation Logic:
 
 - Joins the `raw_data_credit_packages` and `raw_data_requests` tables.
-- Tracks credit utilization against expiration dates.
-- Provides insights into credit usage rates and unused credits.
-- Generates a `credit_package_utilization` table.
+- Then I track credit utilization against their expiration dates.
+- This provides insights into credit usage rates and unused credits.
+- And then generates a `credit_package_utilization` table.
 
 ## How to Run
 
@@ -66,10 +66,6 @@ The `credit_package_utilization.sql` transformation in `transformed_data` analyz
 4. Run `dbt docs generate` to generate documentation.
 5. Run `dbt docs serve` to view the documentation in your browser.
 
-## Additional Notes
-
-- Adjust configurations, such as database connections, in the `profiles.yml` file.
-- Customize and expand transformations based on evolving business requirements.
 
 Feel free to reach out for further details or assistance.
 
