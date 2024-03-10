@@ -1,6 +1,14 @@
 -- Credit Utilization and Expiry Analysis with Total Credit Left Query
 -- This query I select relevant columns and do some data transformation to check status of credit and also claculate days until credit expiry
 -- 
+
+
+-- Configuring the model
+{{ config(
+    materialized='table'
+) }}
+
+
 WITH credit_utilization AS (
      SELECT
         c.id_credit_package,

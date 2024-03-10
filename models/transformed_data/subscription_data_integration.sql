@@ -2,6 +2,13 @@
 -- The CTE s used to join the tables and calculate aggregated metrics, here the row_number function is used to rank organizations based on total payment within each payment cycle.
 -- Then I do some aggregation on the main query to get max price, total and avg credits 
 -- The data can be filtered on rank_per_cycle to see customer with highest subscritpion value
+
+
+-- Configuring the model
+{{ config(
+    materialized='table'
+) }}
+
 WITH Subscription_info AS (
     SELECT
         r.customer_name,
