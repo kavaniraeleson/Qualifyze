@@ -34,7 +34,7 @@ The `customer_engagement_evolution.sql` transformation in `transformed_data` add
 
 - I identify customers who transitioned from individual audit requests to subscription models.
 - Then I the `raw_data_requests` and `raw_data_credit_packages` tables.
-- Also I use  `CASE` statement to categorize customers based on their audit types.
+- Also I use  `CASE` statement to categorize customers based on their request id and credit package type.
 - This generates a `customer_engagement_evolution` table.
 
 ### Subscription Data Integration
