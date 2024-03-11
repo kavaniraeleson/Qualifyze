@@ -23,6 +23,7 @@ The project is organized into two main folders:
 ## Schema Tests
 
 The `schema.yml` file under `raw_data` and `transformed_data` defines tests to ensure data quality in the raw models. Tests include checking for uniqueness, null values, and accepted values.
+More details about the test can be found on the test folder of the project.
 
 ## Transformations
 
