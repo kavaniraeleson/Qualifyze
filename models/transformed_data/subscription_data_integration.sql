@@ -11,6 +11,7 @@
 
 WITH Subscription_info AS (
     SELECT
+        r.id_organization,
         r.customer_name,
         r.audit_type,
         r.price_eur,
@@ -20,7 +21,8 @@ WITH Subscription_info AS (
         c.credits_amount,
         c.total_value_eur,
         c.payment_cycle,
-        ROW_NUMBER() OVER (PARTITION BY c.payment_cycle ORDER BY c.total_value_eur DESC) AS rank_per_cycle 
+        c.id_credit_package,
+        ROW_NUMBER() OVER (PARTITION BY c.payment_cycle ORDER BY c.total_value_eur DESC) AS rank_per_cycle ---- Used to check for each payment cycle the customer with highest subscription value
     FROM
         {{ref ("raw_data_request")}} r
     LEFT JOIN
@@ -28,17 +30,25 @@ WITH Subscription_info AS (
 )
 
 SELECT
+
+    id_organization,
     customer_name,
     audit_type,
-    MAX(price_eur) AS max_price,
+    payment_cycle,
+    COUNT (id_credit_package) as total_credit_packages,
+    MAX (start_date) AS start_date,
+    MAX (end_date) AS end_date,
     ROUND(AVG(credits_amount),2) AS avg_credits,
     SUM(credits_amount) AS total_credits,
-    MAX(total_value_eur) AS max_payment,
-    payment_cycle
+    MAX(total_value_eur) AS highest_payment,
+   
 FROM
     Subscription_info
 
+
+
 GROUP BY
+    id_organization,
     customer_name,
     audit_type,
     payment_cycle

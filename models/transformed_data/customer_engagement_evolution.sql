@@ -5,8 +5,10 @@
 ) }}
 
 
--- SQL query for Customer Engagement Evolution with Model Switch
---- 
+--   SQL query for Customer Engagement Evolution with Model Switch
+---  I create the CTE to check for customers that had activity last year via their creation date, to check those that made request and also those with credit package
+---  This model enables the business to track the customers and their different mode of operations from transactional to subscription to also those who transitioned.
+
 WITH Customer_evolution AS (
     SELECT
         r.id_organization,
@@ -26,11 +28,11 @@ SELECT
     id_organization,
     customer_name,
     CASE
-        WHEN has_activity_last_year = 1 AND has_request = 'True' AND has_credit_package = 'True' THEN 'Transitioned'
+        WHEN has_activity_last_year = 1 AND has_request = 'True' AND has_credit_package = 'True' THEN 'Transitioned' -- customers who have switched models over the last year
         WHEN has_activity_last_year = 1 AND has_request = 'True' THEN 'Transactional Only'
         WHEN has_activity_last_year = 1 AND has_credit_package = 'True' THEN 'Subscription Only'
         WHEN has_request = 'True' AND has_credit_package = 'False' THEN 'Transactional Only (No Credit Package)'
-        WHEN has_request = 'False' AND has_credit_package = 'True' THEN 'Subscription Only (No Request)'
+        WHEN has_request = 'False' AND has_credit_package = 'True' THEN 'Subscription Only (No Request Yet)'
         ELSE 'No Transaction and Subscription'
     END AS customer_evolution
 FROM
