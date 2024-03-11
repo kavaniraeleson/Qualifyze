@@ -63,8 +63,9 @@ The `credit_package_utilization.sql` transformation in `transformed_data` analyz
 1. Ensure your dbt profiles.yml file is correctly configured with your Google BigQuery connection details.
 2. Navigate to the root directory of the project in the terminal.
 3. Run `dbt run` to execute the transformations.
-4. Run `dbt docs generate` to generate documentation.
-5. Run `dbt docs serve` to view the documentation in your browser.
+4.  Run `dbt test` to test the models and ensure data validity.
+5. Run `dbt docs generate` to generate documentation.
+6. Run `dbt docs serve` to view the documentation in your browser.
 
 
 Feel free to reach out to me for further details or assistance.
