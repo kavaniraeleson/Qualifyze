@@ -33,8 +33,9 @@ WITH credit_utilization AS (
     LEFT JOIN
         {{ref ("raw_data_request")}} r ON c.id_organization = r.id_organization
 
-        --WHERE r.customer_name IS NOT NULL
+        WHERE r.customer_name IS NOT NULL
 )
+
 
 SELECT
     id_credit_package,
@@ -48,13 +49,16 @@ SELECT
     CASE
         WHEN credit_utilization_status = 'Active' THEN 'Partially Used Credits'
         WHEN credit_utilization_status = 'Unused' AND days_until_expiry >= 0 THEN 'Unused Credits (Not Expired Yet)'
-        WHEN credit_utilization_status = 'Used' AND days_until_expiry >= 0 THEN 'Expired Credit'
+        WHEN credit_utilization_status = 'Used' AND days_until_expiry <= 0 THEN 'Expired Credit'
         ELSE 'No Credit'
     END AS insights,
     credits_amount,
     SUM(CASE WHEN credit_utilization_status = 'Active' THEN credits_amount ELSE 0 END) OVER (PARTITION BY id_credit_package ORDER BY sub_end_date) AS total_credits_used,
     credits_amount - SUM(CASE WHEN credit_utilization_status = 'Active' THEN credits_amount ELSE 0 END) OVER (PARTITION BY id_credit_package ORDER BY sub_end_date) AS remaining_credits
-FROM
+    
+    FROM
     credit_utilization
+    
+
 
 
