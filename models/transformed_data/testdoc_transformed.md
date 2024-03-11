@@ -1,4 +1,4 @@
-# Schema Tests Explanation
+# 
 
 ## Customer Engagement Evolution
 
